@@ -1,5 +1,6 @@
 
-const CACHE_NAME = "kitteltasche-v1";
+
+const CACHE_NAME = "kitteltasche-v2";
 
 const DATEIEN = [
   "./",
@@ -9,6 +10,7 @@ const DATEIEN = [
   "./manifest.json"
 ];
 
+// App-Dateien für die Offline-Nutzung speichern
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -19,26 +21,35 @@ self.addEventListener("install", (event) => {
   self.skipWaiting();
 });
 
+// Alte Cache-Versionen entfernen
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((namen) => {
       return Promise.all(
         namen
-          .filter((name) => name !== CACHE_NAME)
+          .filter((name) =>
+            name.startsWith("kitteltasche-") &&
+            name !== CACHE_NAME
+          )
           .map((name) => caches.delete(name))
       );
-    })
+    }).then(() => self.clients.claim())
   );
-
-  self.clients.claim();
 });
 
+// Erst Netzwerk versuchen, bei Ausfall Cache nutzen
 self.addEventListener("fetch", (event) => {
-  if (event.request.method !== "GET") return;
+  if (
+    event.request.method !== "GET" ||
+    new URL(event.request.url).origin !== self.location.origin
+  ) {
+    return;
+  }
 
   event.respondWith(
-    caches.match(event.request).then((antwort) => {
-      return antwort || fetch(event.request);
+    fetch(event.request).catch(() => {
+      return caches.match(event.request);
     })
   );
 });
+

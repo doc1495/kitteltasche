@@ -56,4 +56,17 @@ function zuruecksetzen() {
   geburt.focus();
 }
 
+const istGitHubPages =
+  window.location.hostname.endsWith(".github.io");
+
+if (istGitHubPages && "serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("./service-worker.js")
+      .catch((fehler) => {
+        console.error("Offline-Funktion:", fehler);
+      });
+  });
+}
+
 
