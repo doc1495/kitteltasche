@@ -1,6 +1,6 @@
 
 
-const CACHE_NAME = "kitteltasche-v3";
+const CACHE_NAME = "kitteltasche-v4";
 
 const DATEIEN = [
   "./",
