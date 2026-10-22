@@ -1,13 +1,16 @@
 
 
-const CACHE_NAME = "kitteltasche-v2";
+const CACHE_NAME = "kitteltasche-v3";
 
 const DATEIEN = [
   "./",
   "./index.html",
   "./style.css",
   "./script.js",
-  "./manifest.json"
+  "./manifest.json",
+  "./icons/icon-180.png",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png"
 ];
 
 // App-Dateien für die Offline-Nutzung speichern

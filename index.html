@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -8,11 +9,14 @@
 
   <title>Kitteltasche</title>
 
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#2563eb">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Kitteltasche">
-
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon"
+      href="icons/icon-180.png">
+  <meta name="theme-color" content="#17345C">
+  <meta name="apple-mobile-web-app-capable"
+        content="yes">
+  <meta name="apple-mobile-web-app-title"
+        content="Kitteltasche">
 
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
@@ -23,46 +27,77 @@
 
     <!-- STARTSEITE -->
     <section id="startseite">
-      <h1>🩺 Kitteltasche</h1>
-      <p>Deine pädiatrischen Schnellrechner</p>
+
+      <header class="app-header">
+        <div class="app-logo">✚</div>
+        <div>
+          <h1>Kitteltasche</h1>
+          <p>Pädiatrische Schnellrechner</p>
+        </div>
+      </header>
+
+      <h2 class="section-title">Rechner</h2>
 
       <button class="tool"
-              onclick="seiteAnzeigen('gewichtsrechner')">
-        👶 Gewichtsverlust Neugeborene
-        <span>→</span>
+        onclick="seiteAnzeigen('gewichtsrechner')">
+        <span class="tool-icon">👶</span>
+        <span class="tool-text">
+          <strong>Gewichtsverlust</strong>
+          <small>Neugeborene · Prozentrechner</small>
+        </span>
+        <span class="tool-arrow">›</span>
       </button>
+
+      <p class="footer-text">
+        Weitere Rechner folgen
+      </p>
     </section>
 
     <!-- GEWICHTSRECHNER -->
     <section id="gewichtsrechner" hidden>
+
       <button class="zurueck"
-              onclick="seiteAnzeigen('startseite')">
-        ← Zurück
+        onclick="seiteAnzeigen('startseite')">
+        ← Alle Rechner
       </button>
 
-      <h2>Gewichtsverlust Neugeborene</h2>
+      <div class="rechner-header">
+        <div class="tool-icon">👶</div>
+        <h2>Gewichtsverlust</h2>
+        <p>Gewichtsveränderung seit Geburt</p>
+      </div>
 
-      <label for="geburt">Geburtsgewicht (g)</label>
-      <input id="geburt" type="number"
-             min="1" placeholder="z. B. 3500">
+      <div class="rechner-karte">
+        <label for="geburt">
+          Geburtsgewicht (g)
+        </label>
+        <input id="geburt" type="number"
+          min="1" inputmode="decimal"
+          placeholder="z. B. 3500">
 
-      <label for="aktuell">Aktuelles Gewicht (g)</label>
-      <input id="aktuell" type="number"
-             min="1" placeholder="z. B. 3220">
+        <label for="aktuell">
+          Aktuelles Gewicht (g)
+        </label>
+        <input id="aktuell" type="number"
+          min="1" inputmode="decimal"
+          placeholder="z. B. 3220">
 
-      
-<div class="ergebnis-karte">
-  <div class="ergebnis-titel">Gewichtsveränderung</div>
-  <div id="ergebnis">–</div>
-  <div id="differenz"></div>
-</div>
+        <div class="ergebnis-karte"
+          aria-live="polite">
+          <div class="ergebnis-titel">
+            Gewichtsveränderung
+          </div>
+          <div id="ergebnis">–</div>
+          <div id="differenz"></div>
+        </div>
 
-<button class="reset-button" onclick="zuruecksetzen()">
-  ↻ Zurücksetzen
-</button>
+        <button class="reset-button"
+          onclick="zuruecksetzen()">
+          ↻ Zurücksetzen
+        </button>
+      </div>
 
     </section>
-
   </main>
 </body>
 </html>
