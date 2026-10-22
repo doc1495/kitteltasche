@@ -218,3 +218,23 @@ button:focus-visible {
   outline: 3px solid var(--blue);
   outline-offset: 3px;
 }
+/* FLÜSSIGKEITSRECHNER */
+
+.tool + .tool {
+  margin-top: 12px;
+}
+
+.medizin-hinweis {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+#tagesbedarf,
+#laufrate {
+  margin-top: 12px;
+  color: var(--navy);
+  font-size: 28px;
+  font-weight: 700;
+}

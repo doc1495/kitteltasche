@@ -5,6 +5,9 @@ function seiteAnzeigen(seite) {
 
   document.getElementById("gewichtsrechner").hidden =
     seite !== "gewichtsrechner";
+
+  document.getElementById("fluessigkeitsrechner").hidden =
+    seite !== "fluessigkeitsrechner";
 }
 
 const geburt = document.getElementById("geburt");
@@ -68,5 +71,65 @@ if (istGitHubPages && "serviceWorker" in navigator) {
       });
   });
 }
+// FLÜSSIGKEITSBEDARF NACH HOLLIDAY-SEGAR
 
+const gewicht = document.getElementById("gewicht");
+const tagesbedarf = document.getElementById("tagesbedarf");
+const laufrate = document.getElementById("laufrate");
+
+function fluessigkeitBerechnen() {
+
+  const kg = Number(gewicht.value);
+
+  if (
+    !gewicht.value ||
+    !Number.isFinite(kg) ||
+    kg <= 0
+  ) {
+    tagesbedarf.textContent = "–";
+    laufrate.textContent = "–";
+    return;
+  }
+
+  let mlTag;
+
+  if (kg <= 10) {
+
+    mlTag = kg * 100;
+
+  } else if (kg <= 20) {
+
+    mlTag = 1000 + (kg - 10) * 50;
+
+  } else {
+
+    mlTag = 1500 + (kg - 20) * 20;
+
+  }
+
+  const mlStunde = mlTag / 24;
+
+  tagesbedarf.textContent =
+    mlTag.toLocaleString("de-DE", {
+      maximumFractionDigits: 1
+    }) + " ml/Tag";
+
+  laufrate.textContent =
+    mlStunde.toLocaleString("de-DE", {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1
+    }) + " ml/h";
+
+}
+
+gewicht.addEventListener(
+  "input",
+  fluessigkeitBerechnen
+);
+
+function fluessigkeitZuruecksetzen() {
+  gewicht.value = "";
+  fluessigkeitBerechnen();
+  gewicht.focus();
+}
 

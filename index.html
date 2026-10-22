@@ -47,6 +47,15 @@
         </span>
         <span class="tool-arrow">›</span>
       </button>
+      <button class="tool"
+  onclick="seiteAnzeigen('fluessigkeitsrechner')">
+  <span class="tool-icon">💧</span>
+  <span class="tool-text">
+    <strong>Flüssigkeitsbedarf</strong>
+    <small>Holliday-Segar · 100/50/20</small>
+  </span>
+  <span class="tool-arrow">›</span>
+</button>
 
       <p class="footer-text">
         Weitere Rechner folgen
@@ -98,6 +107,67 @@
       </div>
 
     </section>
+    <!-- FLÜSSIGKEITSRECHNER -->
+<section id="fluessigkeitsrechner" hidden>
+
+  <button class="zurueck"
+    onclick="seiteAnzeigen('startseite')">
+    ← Alle Rechner
+  </button>
+
+  <div class="rechner-header">
+    <div class="tool-icon">💧</div>
+    <h2>Flüssigkeitsbedarf</h2>
+    <p>Erhaltungsbedarf nach Holliday-Segar</p>
+  </div>
+
+  <div class="rechner-karte">
+
+    <label for="gewicht">
+      Körpergewicht (kg)
+    </label>
+
+    <input id="gewicht"
+      type="number"
+      min="0.1"
+      step="0.1"
+      inputmode="decimal"
+      placeholder="z. B. 15">
+
+    <div class="ergebnis-karte"
+      aria-live="polite">
+
+      <div class="ergebnis-titel">
+        Flüssigkeitsbedarf pro Tag
+      </div>
+
+      <div id="tagesbedarf">–</div>
+
+      <div class="ergebnis-titel"
+        style="margin-top: 24px">
+        Laufrate
+      </div>
+
+      <div id="laufrate">–</div>
+
+    </div>
+
+    <button class="reset-button"
+      onclick="fluessigkeitZuruecksetzen()">
+      ↻ Zurücksetzen
+    </button>
+
+    <p class="medizin-hinweis">
+      Rechner für den theoretischen
+      Erhaltungsbedarf. Nicht für die
+      Neugeborenenphase oder besondere
+      klinische Situationen geeignet.
+      Flüssigkeitsstatus und individuelle
+      Therapie berücksichtigen.
+    </p>
+
+  </div>
+</section>
   </main>
 </body>
 </html>
