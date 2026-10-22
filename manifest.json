@@ -1,0 +1,12 @@
+
+{
+  "name": "Kitteltasche – Pädiatrische Schnellrechner",
+  "short_name": "Kitteltasche",
+  "description": "Pädiatrische Schnellrechner für den Klinikalltag",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f6fa",
+  "theme_color": "#2563eb",
+  "lang": "de"
+}

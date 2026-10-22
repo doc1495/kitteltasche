@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+
+  <title>Kitteltasche</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Kitteltasche">
+
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <main class="app">
+
+    <!-- STARTSEITE -->
+    <section id="startseite">
+      <h1>🩺 Kitteltasche</h1>
+      <p>Deine pädiatrischen Schnellrechner</p>
+
+      <button class="tool"
+              onclick="seiteAnzeigen('gewichtsrechner')">
+        👶 Gewichtsverlust Neugeborene
+        <span>→</span>
+      </button>
+    </section>
+
+    <!-- GEWICHTSRECHNER -->
+    <section id="gewichtsrechner" hidden>
+      <button class="zurueck"
+              onclick="seiteAnzeigen('startseite')">
+        ← Zurück
+      </button>
+
+      <h2>Gewichtsverlust Neugeborene</h2>
+
+      <label for="geburt">Geburtsgewicht (g)</label>
+      <input id="geburt" type="number"
+             min="1" placeholder="z. B. 3500">
+
+      <label for="aktuell">Aktuelles Gewicht (g)</label>
+      <input id="aktuell" type="number"
+             min="1" placeholder="z. B. 3220">
+
+      
+<div class="ergebnis-karte">
+  <div class="ergebnis-titel">Gewichtsveränderung</div>
+  <div id="ergebnis">–</div>
+  <div id="differenz"></div>
+</div>
+
+<button class="reset-button" onclick="zuruecksetzen()">
+  ↻ Zurücksetzen
+</button>
+
+    </section>
+
+  </main>
+</body>
+</html>
