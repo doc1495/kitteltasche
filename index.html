@@ -57,6 +57,38 @@
   <span class="tool-arrow">›</span>
 </button>
 
+<button class="tool"
+  onclick="seiteAnzeigen('nahrungsrechner')">
+  <span class="tool-icon">🍼</span>
+  <span class="tool-text">
+    <strong>Nahrungsaufbau</strong>
+    <small>Früh- und Reifgeborene</small>
+  </span>
+  <span class="tool-arrow">›</span>
+</button>
+
+<button class="tool"
+  onclick="seiteAnzeigen('neobilanz')">
+  <span class="tool-icon">💧</span>
+  <span class="tool-text">
+    <strong>Flüssigkeitsbilanz Neo</strong>
+    <small>Enteral · i.v.-Restvolumen</small>
+  </span>
+  <span class="tool-arrow">›</span>
+</button>
+
+<button class="tool"
+  onclick="seiteAnzeigen('bilirubinrechner')">
+  <span class="tool-icon">🟡</span>
+  <span class="tool-text">
+    <strong>Bilirubin Neo</strong>
+    <small>Fototherapiegrenze berechnen</small>
+  </span>
+  <span class="tool-arrow">›</span>
+</button>
+
+
+
       <p class="footer-text">
         Weitere Rechner folgen
       </p>
@@ -157,6 +189,16 @@
       ↻ Zurücksetzen
     </button>
 
+<button class="tool"
+  onclick="seiteAnzeigen('nahrungsrechner')">
+  <span class="tool-icon">🍼</span>
+  <span class="tool-text">
+    <strong>Nahrungsaufbau</strong>
+    <small>Frühgeborene · ml pro Mahlzeit</small>
+  </span>
+  <span class="tool-arrow">›</span>
+</button>
+
     <p class="medizin-hinweis">
       Rechner für den theoretischen
       Erhaltungsbedarf. Nicht für die
@@ -168,6 +210,418 @@
 
   </div>
 </section>
+
+
+
+<!-- NAHRUNGSAUFBAU -->
+<section id="nahrungsrechner" hidden>
+
+  <button class="zurueck"
+    onclick="seiteAnzeigen('startseite')">
+    ← Alle Rechner
+  </button>
+
+  <div class="rechner-header">
+    <div class="tool-icon">🍼</div>
+    <h2>Nahrungsaufbau Neo</h2>
+    <p>Enterale Ernährung bei Neugeborenen</p>
+  </div>
+
+  <div class="rechner-karte">
+
+    <!-- Auswahl der Gruppe -->
+    <label for="neo-typ">Neugeborenengruppe</label>
+    <select id="neo-typ">
+      <option value="frueh">Frühgeboren</option>
+      <option value="reif">Reifgeboren</option>
+    </select>
+
+    <!-- Eingaben -->
+    <label for="neo-gewicht">
+      Berechnungsgewicht (g)
+    </label>
+    <input id="neo-gewicht"
+      type="number"
+      min="1"
+      step="any"
+      inputmode="decimal"
+      placeholder="z. B. 1500">
+
+    <label for="neo-lebenstag">Lebenstag</label>
+    <select id="neo-lebenstag">
+      <option value="1">1. Lebenstag</option>
+      <option value="2">2. Lebenstag</option>
+      <option value="3">3. Lebenstag</option>
+      <option value="4">4. Lebenstag</option>
+      <option value="5">5. Lebenstag</option>
+      <option value="6">6. Lebenstag</option>
+      <option value="7">7. Lebenstag</option>
+      <option value="8">8. Lebenstag</option>
+      <option value="9">9. Lebenstag</option>
+      <option value="10">10. Lebenstag</option>
+      <option value="11">11. Lebenstag</option>
+      <option value="12">12. Lebenstag</option>
+      <option value="13">13. Lebenstag</option>
+      <option value="14">14. Lebenstag</option>
+    </select>
+
+    <label for="neo-mahlzeiten">
+      Mahlzeiten pro Tag
+    </label>
+    <select id="neo-mahlzeiten">
+      <option value="6">6 Mahlzeiten (4-stündlich)</option>
+      <option value="8">8 Mahlzeiten (3-stündlich)</option>
+      <option value="12">12 Mahlzeiten (2-stündlich)</option>
+    </select>
+
+    <!-- Manuelle Anpassung -->
+    <div class="neo-orientierung">
+      <div class="neo-ziel-kopf">
+        <strong>Enterale Zielmenge</strong>
+        <span id="neo-vorschlag">–</span>
+      </div>
+
+      <label class="neo-checkbox-label">
+        <input id="neo-manuell"
+          type="checkbox">
+        Zielmenge manuell festlegen
+      </label>
+
+      <div id="neo-manuell-bereich" hidden>
+        <label for="neo-zielmenge">
+          Individuelle Zielmenge (ml/kg/Tag)
+        </label>
+        <input id="neo-zielmenge"
+          type="number"
+          min="0"
+          step="any"
+          inputmode="decimal"
+          placeholder="z. B. 120">
+      </div>
+    </div>
+
+    <!-- Ergebnis -->
+    <div class="ergebnis-karte" aria-live="polite">
+
+      <div class="ergebnis-titel">
+        Tagesmenge
+      </div>
+      <div id="neo-tagesmenge"
+        class="nahrungs-wert">–</div>
+
+      <div class="ergebnis-titel nahrung-abstand">
+        Pro Mahlzeit
+      </div>
+      <div id="neo-einzelmenge"
+        class="nahrungs-wert">–</div>
+
+      <div id="neo-hinweis"
+        class="neo-untertitel"></div>
+    </div>
+
+    <button class="reset-button"
+      onclick="nahrungZuruecksetzen()">
+      ↻ Zurücksetzen
+    </button>
+
+    <p class="medizin-hinweis">
+      Rechnerische Orientierung für geplante
+      enterale Ernährung. Lebenstag entspricht
+      nicht zwingend dem Aufbautag.
+      Die Zielmenge muss entsprechend der
+      klinischen Situation überprüft werden.
+      Kein automatischer Ernährungsplan.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- FLÜSSIGKEITSBEDARF NEONATOLOGIE -->
+<section id="neobilanz" hidden>
+
+  <button class="zurueck"
+    onclick="seiteAnzeigen('startseite')">
+    ← Alle Rechner
+  </button>
+
+  <div class="rechner-header">
+    <div class="tool-icon">💧</div>
+    <h2>Flüssigkeitsbedarf Neo</h2>
+    <p>Enterale und parenterale Flüssigkeitsbilanz</p>
+  </div>
+
+  <div class="rechner-karte">
+
+    <!-- GEWICHT -->
+    <label for="bilanz-geburtsgewicht">
+      Geburtsgewicht (g)
+    </label>
+    <input id="bilanz-geburtsgewicht"
+      type="number" min="1" step="any"
+      inputmode="decimal"
+      placeholder="z. B. 1500">
+
+    <label for="bilanz-gewicht">
+      Berechnungsgewicht (g)
+    </label>
+    <input id="bilanz-gewicht"
+      type="number" min="1" step="any"
+      inputmode="decimal"
+      placeholder="z. B. 1450">
+
+    <!-- LEBENSTAG -->
+    <label for="bilanz-lebenstag">
+      Lebenstag
+    </label>
+    <select id="bilanz-lebenstag">
+      <option value="1">1. Lebenstag</option>
+      <option value="2">2. Lebenstag</option>
+      <option value="3">3. Lebenstag</option>
+      <option value="4">4. Lebenstag</option>
+      <option value="5">5. Lebenstag</option>
+      <option value="6">6. Lebenstag</option>
+      <option value="7">7. Lebenstag</option>
+      <option value="8">8. Lebenstag</option>
+      <option value="9">9. Lebenstag</option>
+      <option value="10">10. Lebenstag</option>
+    </select>
+
+    <!-- AUTOMATISCHES FLÜSSIGKEITSZIEL -->
+    <div class="neo-orientierung">
+
+      <div class="neo-ziel-kopf">
+        <strong>Gesamtflüssigkeitsziel</strong>
+        <span id="bilanz-vorschlag">–</span>
+      </div>
+
+      <label class="neo-checkbox-label">
+        <input id="bilanz-manuell"
+          type="checkbox">
+        Flüssigkeitsziel manuell anpassen
+      </label>
+
+      <div id="bilanz-manuell-bereich" hidden>
+        <label for="bilanz-gesamt">
+          Gesamtflüssigkeit (ml/kg/Tag)
+        </label>
+        <input id="bilanz-gesamt"
+          type="number" min="0" step="any"
+          inputmode="decimal"
+          placeholder="z. B. 150">
+      </div>
+
+    </div>
+
+    <!-- ENTERALE ZUFUHR -->
+    <label for="bilanz-enteral">
+      Enterale Ernährung (ml/kg/Tag)
+    </label>
+    <input id="bilanz-enteral"
+  type="number" min="0" step="any"
+  inputmode="decimal"
+  value="0">
+
+    <!-- ZUSÄTZLICHE FLÜSSIGKEIT -->
+    <label for="bilanz-sonstige">
+      Sonstige Zufuhr (ml/Tag)
+    </label>
+    <input id="bilanz-sonstige"
+      type="number" min="0" step="any"
+      inputmode="decimal" value="0">
+
+    <!-- ERGEBNIS -->
+    <div class="ergebnis-karte" aria-live="polite">
+
+      <div class="ergebnis-titel">
+        Verbleibendes i.v.-Volumenbudget
+      </div>
+
+      <div id="bilanz-rest"
+        class="nahrungs-wert">–</div>
+
+      <div class="ergebnis-titel nahrung-abstand">
+        Laufrate über 24 Stunden
+      </div>
+
+      <div id="bilanz-rate"
+        class="nahrungs-wert">–</div>
+
+      <p id="bilanz-hinweis"
+        class="medizin-hinweis"></p>
+
+    </div>
+
+    <!-- ERWEITERTE INFORMATIONEN -->
+    <details class="neo-details">
+      <summary>
+        Erweiterte Berechnungen
+      </summary>
+
+      <div class="neo-details-inhalt">
+        <p>
+          Hier ergänzen wir später:
+        </p>
+        <ul>
+          <li>Glukosezufuhrrate (GIR)</li>
+          <li>Aminosäuren</li>
+          <li>Lipide</li>
+          <li>Elektrolyte</li>
+        </ul>
+        <p>
+          Noch keine Dosierungsberechnung.
+        </p>
+      </div>
+    </details>
+
+    <button class="reset-button"
+      onclick="bilanzZuruecksetzen()">
+      ↻ Zurücksetzen
+    </button>
+
+    <p class="medizin-hinweis">
+      Die Flüssigkeitsziele sind Orientierungswerte
+      aus einem lokalen Schema, keine verbindlichen
+      Therapieempfehlungen.
+
+      Der individuelle Flüssigkeitsbedarf hängt
+      unter anderem von Reife, Flüssigkeitsbilanz,
+      Diurese, Elektrolyten und klinischem Zustand ab.
+
+      Das Ergebnis beschreibt ausschließlich
+      das verbleibende intravenöse Volumenbudget,
+      keine vollständige parenterale Ernährung.
+    </p>
+
+  </div>
+</section>
+
+<!-- BILIRUBIN NEO -->
+<section id="bilirubinrechner" hidden>
+
+  <button class="zurueck"
+    onclick="seiteAnzeigen('startseite')">
+    ← Alle Rechner
+  </button>
+
+  <div class="rechner-header">
+    <div class="tool-icon">🟡</div>
+    <h2>Bilirubin Neo</h2>
+    <p>Fototherapiegrenze · lokales SOP-Schema</p>
+  </div>
+
+  <div class="rechner-karte">
+
+    <label>Aktuelles postmenstruelles Alter (PMA)</label>
+
+    <div class="bili-ssw-row">
+      <input id="bili-ssw"
+        type="number" min="22" max="44"
+        placeholder="Wochen"
+        inputmode="numeric">
+
+      <span>+</span>
+
+      <input id="bili-ssw-tage"
+        type="number" min="0" max="6"
+        placeholder="Tage"
+        inputmode="numeric">
+    </div>
+
+    <label for="bili-alter">Lebensalter</label>
+    <div class="bili-alter-row">
+      <input id="bili-alter"
+        type="number" min="0" step="any"
+        placeholder="z. B. 36">
+
+      <select id="bili-alter-einheit">
+        <option value="stunden">Stunden</option>
+        <option value="tage">Tage</option>
+      </select>
+    </div>
+
+    <label for="bili-wert">Gesamtbilirubin</label>
+    <div class="bili-wert-row">
+      <input id="bili-wert"
+        type="number" min="0" step="any"
+        placeholder="z. B. 12,5">
+
+      <select id="bili-einheit">
+        <option value="mg">mg/dl</option>
+        <option value="umol">µmol/l</option>
+      </select>
+    </div>
+
+    <label class="neo-checkbox-label">
+      <input id="bili-coombs"
+        type="checkbox">
+      Direkter Coombs-Test positiv
+    </label>
+
+    <div class="ergebnis-karte"
+      aria-live="polite">
+
+      <div class="ergebnis-titel">
+        Rechnerische Fototherapiegrenze
+      </div>
+
+      <div id="bili-grenze"
+        class="nahrungs-wert">–</div>
+
+      <div class="ergebnis-titel nahrung-abstand">
+        Abstand zur Grenze
+      </div>
+
+      <div id="bili-abstand"
+        class="nahrungs-wert">–</div>
+
+      <p id="bili-status"
+        class="medizin-hinweis"></p>
+    </div>
+
+    <div id="bili-warnung"
+      class="medizin-hinweis"
+      role="status"></div>
+
+    <details class="neo-details">
+      <summary>Berechnungsdetails & Hinweise</summary>
+
+      <div class="neo-details-inhalt">
+        <p>
+          Lokales Schema:
+          vollendete aktuelle SSW − 20.
+        </p>
+
+        <p>
+          Alterskorrektur:
+          &lt; 24 h: −6 mg/dl,
+          24 bis &lt; 48 h: −4 mg/dl,
+          48 bis &lt; 72 h: −2 mg/dl.
+        </p>
+
+        <p>
+          Direkter Coombs-Test positiv:
+          zusätzlich −2 mg/dl.
+        </p>
+
+        <p>
+          Die Formel ist eine lokale Faustregel,
+          keine allgemein validierte Therapiegrenze.
+          Bei besonderen Risikokonstellationen ist
+          eine individuelle Beurteilung erforderlich.
+        </p>
+      </div>
+    </details>
+
+    <button class="reset-button"
+      onclick="bilirubinZuruecksetzen()">
+      ↻ Zurücksetzen
+    </button>
+
+  </div>
+</section>
+
+
   </main>
 </body>
 </html>
